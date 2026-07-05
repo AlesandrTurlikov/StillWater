@@ -1,0 +1,1012 @@
+Sanchous, [26.06.2026 01:13]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stillwater — A quiet place to think out loud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#13160f;
+    --ink-2:#1b1f17;
+    --moss:#4a5d45;
+    --moss-light:#7c8f6e;
+    --stone:#9a9888;
+    --fog:#d9ddd1;
+    --paper:#f3efe6;
+    --ember:#d9a066;
+    --ember-light:#ecc79a;
+    --danger-warm:#c97a4a;
+    --radius:10px;
+    --container:1120px;
+    --serif:'Fraunces', Georgia, serif;
+    --sans:'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;}
+  .container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ember);
+    margin:0 0 14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:18px;height:1px;background:var(--ember);display:inline-block;}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0;letter-spacing:-0.01em;}
+  em{font-style:italic;color:var(--ember-light);}
+  p{margin:0;}
+  .btn{
+    font-family:var(--sans);
+    font-size:0.95rem;
+    font-weight:500;
+    padding:0.95rem 1.7rem;
+    border-radius:var(--radius);
+    border:1px solid transparent;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .25s ease, background .25s ease, border-color .25s ease;
+    text-decoration:none;
+  }
+  .btn:focus-visible{outline:2px solid var(--ember);outline-offset:3px;}
+  .btn-primary{background:var(--ember);color:#1b1303;}
+  .btn-primary:hover{background:var(--ember-light);transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--paper);border-color:rgba(243,239,230,0.25);}
+  .btn-ghost:hover{border-color:var(--ember);color:var(--ember-light);}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(14px) saturate(140%);
+    background:rgba(19,22,15,0.62);
+    border-bottom:1px solid rgba(243,239,230,0.08);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:1.25rem;color:var(--paper);text-decoration:none;}
+  .brand svg{color:var(--ember);}
+  .nav-links{display:flex;align-items:center;gap:30px;list-style:none;margin:0;padding:0;}
+  .nav-links a{font-size:0.92rem;text-decoration:none;color:var(--fog);opacity:0.85;transition:opacity .2s, color .2s;}
+  .nav-links a:hover{opacity:1;color:var(--ember-light);}
+  .nav-cta{display:flex;align-items:center;gap:18px;}
+  .menu-toggle{display:none;background:none;border:none;color:var(--paper);cursor:pointer;padding:6px;}
+  @media (max-width:860px){
+    .nav-links{position:fixed;top:64px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;background:var(--ink-2);border-bottom:1px solid rgba(243,239,230,0.08);max-height:0;overflow:hidden;transition:max-height .35s ease;}
+    .nav-links.open{max-height:300px;}
+    .nav-links li{width:100%;}
+    .nav-links a{display:block;padding:16px 24px;width:100%;border-top:1px solid rgba(243,239,230,0.06);}
+    .menu-toggle{display:block;}
+    .nav-cta .btn-ghost{display:none;}
+  }
+
+/* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+    padding-top:64px;
+  }
+  .hero .bg-layer{
+    position:absolute;inset:-6% -2%;
+    background-image:url("YOUR_WATERFALL_URL_HERE");
+    background-size:cover;
+    background-position:center 35%;
+    filter:saturate(0.85) brightness(0.8);
+    will-change:transform;
+  }
+  .hero .scrim{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(19,22,15,0.55) 0%, rgba(19,22,15,0.35) 35%, rgba(19,22,15,0.92) 92%, var(--ink) 100%);
+  }
+  .hero-content{position:relative;z-index:2;padding:0 24px 96px;width:100%;max-width:var(--container);margin:0 auto;}
+  .hero h1{
+    font-size:clamp(2.4rem, 5.6vw, 4.4rem);
+    line-height:1.04;
+    max-width:14ch;
+    color:var(--paper);
+  }
+  .hero .sub{
+    margin-top:22px;
+    max-width:46ch;
+    font-size:1.08rem;
+    color:var(--fog);
+    font-weight:300;
+  }
+  .hero .cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .hero .micro{margin-top:18px;font-family:var(--mono);font-size:0.74rem;color:var(--stone);letter-spacing:0.04em;}
+
+  /* ---------- WAVE DIVIDER ---------- */
+  .wave-divider{width:100%;height:34px;display:block;}
+  .wave-divider path{
+    stroke-dasharray:1300;
+    stroke-dashoffset:1300;
+    transition:stroke-dashoffset 1.6s cubic-bezier(.2,.7,.3,1);
+  }
+  .wave-divider.in-view path{stroke-dashoffset:0;}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{position:relative;padding:96px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.6rem);}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* ---------- VALUE PROPS ---------- */
+  .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(243,239,230,0.08);border:1px solid rgba(243,239,230,0.08);border-radius:var(--radius);overflow:hidden;}
+  .value-card{background:var(--ink);padding:34px 28px;}
+  .value-card .tag{font-family:var(--mono);font-size:0.7rem;color:var(--moss-light);letter-spacing:0.1em;text-transform:uppercase;}
+  .value-card h3{font-size:1.3rem;margin:14px 0 12px;color:var(--paper);}
+  .value-card p{color:var(--stone);font-size:0.96rem;}
+  @media (max-width:760px){.value-grid{grid-template-columns:1fr;}}
+
+  /* ---------- PHILOSOPHY (temple bg) ---------- */
+  .philosophy{padding:0;}
+  .philosophy-inner{position:relative;padding:120px 0;}
+  .philosophy .bg-layer{
+    position:absolute;inset:-8% -2%;
+    background-image:url("YOUR_TEMPLE_URL_HERE");
+    background-size:cover;background-position:center;
+    filter:saturate(0.7) brightness(0.55);
+    will-change:transform;
+  }
+  .philosophy .scrim{position:absolute;inset:0;background:linear-gradient(180deg, var(--ink) 0%, rgba(19,22,15,0.55) 14%, rgba(19,22,15,0.55) 86%, var(--ink) 100%);}
+  .philosophy .container{position:relative;z-index:2;}
+  .method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .method-card{
+    background:rgba(19,22,15,0.55);
+    border:1px solid rgba(243,239,230,0.14);
+    border-radius:var(--radius);
+    padding:26px 22px;
+    backdrop-filter:blur(6px);
+  }
+  .method-card .tag{font-family:var(--mono);font-size:0.78rem;letter-spacing:0.12em;color:var(--ember-light);}
+  .method-card p{margin-top:12px;color:var(--fog);font-size:0.93rem;}
+  @media (max-width:900px){.method-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.method-grid{grid-template-columns:1fr;}}
+
+  /* ---------- CHAT ---------- */
+  .chat-wrap{max-width:760px;margin:0 auto;}
+  .chat-disclaimer{font-size:0.88rem;color:var(--stone);margin-bottom:24px;}
+
+
+.crisis-strip{
+    border:1px solid rgba(217,160,102,0.4);
+    background:rgba(217,160,102,0.08);
+    border-radius:var(--radius);
+    padding:14px 18px;
+    margin-bottom:18px;
+    display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    transition:background .4s ease, border-color .4s ease;
+  }
+  .crisis-strip.alert{background:rgba(217,160,102,0.18);border-color:var(--ember);}
+  .crisis-strip-text{font-size:0.88rem;color:var(--ember-light);}
+  .crisis-strip-text strong{color:var(--paper);}
+  .crisis-details{display:none;margin-top:14px;padding-top:14px;border-top:1px solid rgba(243,239,230,0.12);font-size:0.86rem;color:var(--fog);}
+  .crisis-details.open{display:block;}
+  .crisis-details .res{margin-top:8px;}
+  .crisis-details .res strong{color:var(--ember-light);}
+  .link-btn{background:none;border:none;color:var(--ember-light);font-family:var(--sans);font-size:0.85rem;cursor:pointer;text-decoration:underline;padding:0;}
+
+  .chat-panel{
+    background:var(--ink-2);
+    border:1px solid rgba(243,239,230,0.1);
+    border-radius:16px;
+    overflow:hidden;
+  }
+  .chat-header{display:flex;align-items:center;gap:10px;padding:18px 22px;border-bottom:1px solid rgba(243,239,230,0.08);}
+  .chat-header .dot{width:8px;height:8px;border-radius:50%;background:var(--moss-light);box-shadow:0 0 0 4px rgba(124,143,110,0.18);}
+  .chat-header span{font-family:var(--mono);font-size:0.78rem;color:var(--stone);letter-spacing:0.06em;}
+  .chat-messages{
+    height:420px;overflow-y:auto;padding:24px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .msg{max-width:78%;padding:13px 16px;border-radius:14px;font-size:0.95rem;line-height:1.55;animation:rise .5s ease both;}
+  @keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .msg.assistant{align-self:flex-start;background:rgba(243,239,230,0.07);color:var(--fog);border-bottom-left-radius:4px;}
+  .msg.user{align-self:flex-end;background:rgba(217,160,102,0.16);color:var(--paper);border-bottom-right-radius:4px;}
+  .msg.error{align-self:flex-start;background:rgba(201,122,74,0.14);color:var(--ember-light);font-style:italic;}
+  .typing{align-self:flex-start;display:flex;gap:5px;padding:13px 16px;}
+  .typing span{width:6px;height:6px;border-radius:50%;background:var(--stone);animation:bounce 1.2s infinite ease-in-out;}
+  .typing span:nth-child(2){animation-delay:.15s;}
+  .typing span:nth-child(3){animation-delay:.3s;}
+  @keyframes bounce{0%,80%,100%{opacity:0.3;transform:translateY(0);}40%{opacity:1;transform:translateY(-4px);}}
+  .chat-input-row{display:flex;gap:10px;padding:16px 18px;border-top:1px solid rgba(243,239,230,0.08);}
+  .chat-input-row textarea{
+    flex:1;resize:none;background:rgba(243,239,230,0.05);border:1px solid rgba(243,239,230,0.12);
+    border-radius:10px;color:var(--paper);font-family:var(--sans);font-size:0.95rem;padding:12px 14px;
+    max-height:120px;line-height:1.4;
+  }
+  .chat-input-row textarea:focus{outline:none;border-color:var(--ember);}
+  .chat-input-row button{
+    background:var(--ember);border:none;border-radius:10px;width:48px;color:#1b1303;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:background .2s, opacity .2s;
+  }
+  .chat-input-row button:hover{background:var(--ember-light);}
+  .chat-input-row button:disabled{opacity:0.45;cursor:not-allowed;}
+  .chat-foot-note{text-align:center;font-family:var(--mono);font-size:0.72rem;color:var(--stone);margin-top:14px;}
+
+  /* ---------- SAFETY ---------- */
+  .safety-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .safety-card{background:var(--ink-2);border:1px solid rgba(243,239,230,0.08);border-radius:var(--radius);padding:24px 20px;}
+  .safety-card .tag{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;color:var(--ember);}
+  .safety-card p{margin-top:10px;font-size:0.89rem;color:var(--fog);}
+  @media (max-width:900px){.safety-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.safety-grid{grid-template-columns:1fr;}}
+
+
+/* ---------- PRICING (palace bg) ---------- */
+  .pricing{padding:0;}
+  .pricing-inner{position:relative;padding:120px 0 100px;}
+  .pricing .bg-layer{
+    position:absolute;inset:-8% -2%;
+    background-image:url("YOUR_PALACE_URL_HERE");
+    background-size:cover;background-position:center 30%;
+    filter:saturate(0.55) brightness(0.4);
+    will-change:transform;
+  }
+  .pricing .scrim{position:absolute;inset:0;background:linear-gradient(180deg, var(--ink) 0%, rgba(19,22,15,0.78) 12%, rgba(19,22,15,0.86) 88%, var(--ink) 100%);}
+  .pricing .container{position:relative;z-index:2;}
+  .toggle-row{display:flex;align-items:center;gap:14px;margin-bottom:44px;}
+  .toggle{
+    position:relative;width:50px;height:28px;background:rgba(243,239,230,0.12);border-radius:999px;cursor:pointer;border:1px solid rgba(243,239,230,0.2);
+  }
+  .toggle::after{content:"";position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:var(--ember);transition:transform .25s ease;}
+  .toggle.yearly::after{transform:translateX(22px);}
+  .toggle-row .label{font-size:0.92rem;color:var(--fog);}
+  .save-badge{font-family:var(--mono);font-size:0.68rem;background:rgba(217,160,102,0.18);color:var(--ember-light);padding:3px 9px;border-radius:6px;letter-spacing:0.05em;}
+
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .price-card{
+    background:rgba(27,31,23,0.78);
+    border:1px solid rgba(243,239,230,0.12);
+    border-radius:16px;padding:34px 30px;backdrop-filter:blur(8px);
+  }
+  .price-card.premium{border-color:rgba(217,160,102,0.55);position:relative;}
+  .price-card .plan-name{font-family:var(--serif);font-size:1.4rem;color:var(--paper);}
+  .price-card .plan-price{font-family:var(--serif);font-size:2.6rem;color:var(--paper);margin-top:10px;}
+  .price-card .plan-price span{font-size:1rem;font-family:var(--sans);color:var(--stone);}
+  .price-card ul{list-style:none;margin:24px 0 30px;padding:0;display:flex;flex-direction:column;gap:12px;}
+  .price-card li{font-size:0.92rem;color:var(--fog);display:flex;gap:10px;align-items:flex-start;}
+  .price-card li::before{content:"·";color:var(--ember);font-size:1.4rem;line-height:0.8;}
+  .price-card .btn{width:100%;justify-content:center;}
+  @media (max-width:760px){.price-grid{grid-template-columns:1fr;}}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:760px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid rgba(243,239,230,0.1);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;color:var(--paper);font-family:var(--sans);
+    font-size:1rem;padding:22px 4px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .faq-q .plus{font-family:var(--mono);color:var(--ember);transition:transform .3s ease;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .faq-a p{padding:0 4px 22px;color:var(--stone);font-size:0.93rem;max-width:60ch;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink-2);border-top:1px solid rgba(243,239,230,0.08);padding:72px 0 32px;}
+  .crisis-block{
+    border:1px solid rgba(217,160,102,0.3);background:rgba(217,160,102,0.06);border-radius:var(--radius);
+    padding:26px 28px;margin-bottom:56px;
+  }
+  .crisis-block h3{font-size:1.05rem;color:var(--ember-light);margin-bottom:14px;font-family:var(--sans);font-weight:600;}
+  .crisis-block .res-row{display:flex;flex-wrap:wrap;gap:28px;}
+  .crisis-block .res-item{font-size:0.9rem;color:var(--fog);}
+  .crisis-block .res-item strong{display:block;color:var(--paper);font-family:var(--mono);font-size:0.78rem;letter-spacing:0.06em;margin-bottom:3px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;padding-bottom:48px;border-bottom:1px solid rgba(243,239,230,0.08);}
+
+.footer-brand p{margin-top:14px;color:var(--stone);font-size:0.88rem;max-width:32ch;}
+  .footer-col h4{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);margin-bottom:16px;}
+  .footer-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .footer-col a{font-size:0.9rem;color:var(--fog);text-decoration:none;}
+  .footer-col a:hover{color:var(--ember-light);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:28px;}
+  .footer-bottom p{font-size:0.78rem;color:var(--stone);max-width:60ch;}
+  @media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;}}
+
+  /* ---------- MODAL (mock checkout) ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(10,12,8,0.72);backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;z-index:100;
+    opacity:0;pointer-events:none;transition:opacity .3s ease;padding:20px;
+  }
+  .modal-overlay.show{opacity:1;pointer-events:auto;}
+  .modal{
+    background:var(--ink-2);border:1px solid rgba(243,239,230,0.12);border-radius:16px;
+    max-width:420px;width:100%;padding:30px;transform:translateY(14px);transition:transform .3s ease;
+  }
+  .modal-overlay.show .modal{transform:translateY(0);}
+  .modal h3{font-size:1.3rem;color:var(--paper);}
+  .modal .modal-sub{font-size:0.85rem;color:var(--stone);margin-top:8px;}
+  .modal .field{margin-top:16px;}
+  .modal label{display:block;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--stone);margin-bottom:6px;}
+  .modal input{
+    width:100%;background:rgba(243,239,230,0.05);border:1px solid rgba(243,239,230,0.14);border-radius:8px;
+    padding:11px 12px;color:var(--paper);font-family:var(--sans);font-size:0.92rem;
+  }
+  .modal input:focus{outline:none;border-color:var(--ember);}
+  .modal .row2{display:flex;gap:12px;}
+  .modal .row2 .field{flex:1;}
+  .modal .btn{width:100%;justify-content:center;margin-top:22px;}
+  .modal-close{position:absolute;top:18px;right:18px;background:none;border:none;color:var(--stone);cursor:pointer;font-size:1.2rem;}
+  .modal{position:relative;}
+  .modal-success{text-align:center;padding:10px 0;}
+  .modal-success .check{width:54px;height:54px;border-radius:50%;background:rgba(124,143,110,0.18);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;color:var(--moss-light);}
+  .modal-demo-note{margin-top:18px;font-size:0.74rem;color:var(--stone);font-family:var(--mono);line-height:1.5;}
+
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:rgba(243,239,230,0.15);border-radius:8px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-row">
+    <a href="#top" class="brand">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M2 18c3-4 6-4 9 0s6 4 9 0s6-4 6-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2 12c3-4 6-4 9 0s6 4 9 0s6-4 6-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.5"/></svg>
+      Stillwater
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#chat">Talk now</a></li>
+      <li><a href="#safety">Safety</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#chat" class="btn btn-ghost" style="padding:0.6rem 1.2rem;font-size:0.88rem;">Open chat</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+
+Sanchous, [26.06.2026 01:13]
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="bg-layer" id="heroBg"></div>
+    <div class="scrim"></div>
+    <div class="hero-content">
+      <p class="eyebrow">AI-GUIDED REFLECTION · AVAILABLE 24/7</p>
+      <h1>A quiet place to <em>think out loud.</em></h1>
+      <p class="sub">Stillwater is a calm space for working through what's on your mind — between therapy sessions, before you're ready for one, or just because today is heavy. Not a therapist. Always here.</p>
+      <div class="cta-row">
+        <a href="#chat" class="btn btn-primary">Start talking</a>
+        <a href="#how" class="btn btn-ghost">How it works</a>
+      </div>
+      <p class="micro">FREE TO START · NO ACCOUNT NEEDED FOR THIS DEMO</p>
+    </div>
+  </section>
+
+  <svg class="wave-divider reveal" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 C 200 0, 400 40, 600 20 C 800 0, 1000 40, 1200 20" stroke="#9a9888" stroke-width="1" fill="none"/></svg>
+
+  <!-- VALUE PROPS -->
+  <section id="why">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">WHY PEOPLE COME HERE</p>
+        <h2>Three things people tell us matter most</h2>
+      </div>
+      <div class="value-grid reveal">
+        <div class="value-card">
+          <p class="tag">01 — TIMING</p>
+          <h3>Always awake</h3>
+          <p>3am spirals don't wait for office hours. Stillwater is here whenever your mind gets loud, no appointment required.</p>
+        </div>
+        <div class="value-card">
+          <p class="tag">02 — PRESSURE</p>
+          <h3>No performance</h3>
+          <p>No small talk, no waiting room, no explaining yourself from scratch. Say the half-formed thought exactly as it is.</p>
+        </div>
+        <div class="value-card">
+          <p class="tag">03 — HONESTY</p>
+          <h3>Honest about its limits</h3>
+          <p>Stillwater reflects — it doesn't diagnose. It will tell you plainly when a real professional is what you actually need.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wave-divider reveal" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 C 200 40, 400 0, 600 20 C 800 40, 1000 0, 1200 20" stroke="#9a9888" stroke-width="1" fill="none"/></svg>
+
+  <!-- PHILOSOPHY / HOW IT WORKS -->
+  <section class="philosophy" id="how">
+    <div class="philosophy-inner">
+      <div class="bg-layer" id="templeBg"></div>
+      <div class="scrim"></div>
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">THE METHOD</p>
+          <h2 style="color:#f3efe6;">Four ways Stillwater listens</h2>
+        </div>
+        <div class="method-grid reveal">
+          <div class="method-card">
+            <p class="tag">NOTICE</p>
+            <p>It asks what's actually happening, not just what you think you should feel.</p>
+          </div>
+          <div class="method-card">
+            <p class="tag">NAME</p>
+            <p>Putting feelings into words first, before jumping straight to fixing them.</p>
+          </div>
+          <div class="method-card">
+            <p class="tag">GROUND</p>
+            <p>Simple, real techniques — breathing, grounding, a walk — never a vague "just relax."</p>
+          </div>
+          <div class="method-card">
+            <p class="tag">CONNECT</p>
+            <p>If what you're feeling needs more than reflection, Stillwater says so clearly and points you toward real help.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+Sanchous, [26.06.2026 01:13]
+<!-- CHAT -->
+  <section id="chat">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">TRY IT — LIVE</p>
+        <h2>Talk to Stillwater</h2>
+      </div>
+      <div class="chat-wrap reveal">
+        <p class="chat-disclaimer">This is a real, working conversation, not a recording. Stillwater is an AI, not a licensed clinician, and this isn't a substitute for therapy or emergency care.</p>
+
+        <div class="crisis-strip" id="crisisStrip">
+          <p class="crisis-strip-text"><strong>In immediate danger, or thinking about suicide?</strong> Call or text 988 — free, 24/7.</p>
+          <button class="link-btn" id="crisisToggle">More resources</button>
+        </div>
+        <div class="crisis-details" id="crisisDetails">
+          <div class="res"><strong>988 Suicide &amp; Crisis Lifeline</strong> — call or text 988 (US, free, 24/7)</div>
+          <div class="res"><strong>Crisis Text Line</strong> — text HOME to 741741</div>
+          <div class="res"><strong>Immediate danger</strong> — call 911 or go to the nearest emergency room</div>
+          <div class="res"><strong>Outside the US</strong> — findahelpline.com lists crisis lines by country</div>
+        </div>
+
+        <div class="chat-panel" style="margin-top:18px;">
+          <div class="chat-header">
+            <span class="dot"></span>
+            <span>STILLWATER · LIVE</span>
+          </div>
+          <div class="chat-messages" id="chatMessages">
+            <div class="msg assistant">Hi, I'm here. What's on your mind today?</div>
+          </div>
+          <div class="chat-input-row">
+            <textarea id="chatInput" rows="1" placeholder="Type what's on your mind…" maxlength="1000"></textarea>
+            <button id="sendBtn" aria-label="Send message">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="chat-foot-note">Messages aren't saved anywhere after you close this tab.</p>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wave-divider reveal" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 C 200 0, 400 40, 600 20 C 800 0, 1000 40, 1200 20" stroke="#9a9888" stroke-width="1" fill="none"/></svg>
+
+  <!-- SAFETY -->
+  <section id="safety">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">HOW WE KEEP THIS SAFE</p>
+        <h2>Built with guardrails, not just good intentions</h2>
+      </div>
+      <div class="safety-grid reveal">
+        <div class="safety-card">
+          <p class="tag">NO DIAGNOSIS</p>
+          <p>Stillwater never tells you what disorder you have. That's a licensed professional's call, always.</p>
+        </div>
+        <div class="safety-card">
+          <p class="tag">NO INVENTED FACTS</p>
+          <p>It sticks to established, general coping tools, and says "I'm not sure" instead of making something up.</p>
+        </div>
+        <div class="safety-card">
+          <p class="tag">CRISIS-FIRST</p>
+          <p>Any sign of self-harm or suicidal thinking immediately surfaces real crisis resources — never methods, never details.</p>
+        </div>
+        <div class="safety-card">
+          <p class="tag">PRIVATE BY DEFAULT</p>
+          <p>No identifying details are requested or required to talk. You stay in control of what you share.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="pricing-inner">
+      <div class="bg-layer" id="palaceBg"></div>
+      <div class="scrim"></div>
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">PRICING</p>
+
+Sanchous, [26.06.2026 01:13]
+<h2 style="color:#f3efe6;">Start free. Go deeper if you want to.</h2>
+        </div>
+        <div class="toggle-row reveal">
+          <span class="label">Monthly</span>
+          <div class="toggle" id="billingToggle" role="switch" aria-checked="false" tabindex="0"></div>
+          <span class="label">Yearly</span>
+          <span class="save-badge">SAVE 25%</span>
+        </div>
+        <div class="price-grid reveal">
+          <div class="price-card">
+            <p class="plan-name">Free</p>
+            <p class="plan-price">$0</p>
+            <ul>
+              <li>15 conversations a day</li>
+              <li>Core reflection &amp; grounding tools</li>
+              <li>Crisis-safety features, always on</li>
+              <li>No account required</li>
+            </ul>
+            <a href="#chat" class="btn btn-ghost">Start free</a>
+          </div>
+          <div class="price-card premium">
+            <p class="plan-name">Premium</p>
+            <p class="plan-price" id="premiumPrice">$12<span>/month</span></p>
+            <ul>
+              <li>Unlimited conversations</li>
+              <li>Stillwater remembers context across longer conversations</li>
+              <li>Weekly written reflection summary</li>
+              <li>Priority response speed</li>
+              <li>Early access to new grounding exercises</li>
+            </ul>
+            <button class="btn btn-primary" id="upgradeBtn">Upgrade to Premium</button>
+          </div>
+        </div>
+        <p style="margin-top:20px;font-size:0.82rem;color:#9a9888;">Premium supports the people and infrastructure behind Stillwater. Cancel anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">QUESTIONS</p>
+        <h2>Before you start</h2>
+      </div>
+      <div class="faq reveal">
+        <div class="faq-item">
+          <button class="faq-q">Is this the same as therapy?<span class="plus">+</span></button>
+          <div class="faq-a"><p>No. Stillwater is a reflective AI companion, not a licensed therapist. It's built to sit alongside professional care, or to help while you're deciding whether to seek it — not to replace it.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is what I write private?<span class="plus">+</span></button>
+          <div class="faq-a"><p>You don't need an account to use the free demo, and no identifying information is required. In this demo, conversations live only in your browser tab and aren't saved once you close it.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What happens if I mention a crisis?<span class="plus">+</span></button>
+          <div class="faq-a"><p>Stillwater is built to recognize signs of crisis and respond with real, immediate resources — like the 988 Suicide &amp; Crisis Lifeline — rather than continuing the conversation as usual. It will never provide details about methods or means, under any circumstances.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I cancel Premium anytime?<span class="plus">+</span></button>
+          <div class="faq-a"><p>Yes — no contracts, no retention calls. One click and it stops at the end of your billing period.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="crisis-block">
+      <h3>If you're struggling right now, please don't wait on an AI</h3>
+      <div class="res-row">
+        <div class="res-item"><strong>988 LIFELINE</strong>Call or text 988 — free, 24/7, US</div>
+        <div class="res-item"><strong>CRISIS TEXT LINE</strong>Text HOME to 741741</div>
+
+Sanchous, [26.06.2026 01:13]
+<div class="res-item"><strong>IMMEDIATE DANGER</strong>Call 911 or go to your nearest ER</div>
+        <div class="res-item"><strong>OUTSIDE THE US</strong>findahelpline.com</div>
+      </div>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="brand" style="font-size:1.1rem;">
+          <svg width="22" height="22" viewBox="0 0 28 28" fill="none"><path d="M2 18c3-4 6-4 9 0s6 4 9 0s6-4 6-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2 12c3-4 6-4 9 0s6 4 9 0s6-4 6-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.5"/></svg>
+          Stillwater
+        </a>
+        <p>A calm space to think out loud. Built for reflection, not diagnosis.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#safety">Safety</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Stillwater is an AI companion for reflection and emotional support. It is not a medical device, does not provide therapy, diagnosis, or treatment, and is not a substitute for professional mental health care or emergency services.</p>
+      <p>© 2026 Stillwater</p>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div id="modalCheckout">
+      <h3>Upgrade to Premium</h3>
+      <p class="modal-sub">$12.00 billed monthly · cancel anytime</p>
+      <div class="field">
+        <label>Card number</label>
+        <input type="text" placeholder="4242 4242 4242 4242" inputmode="numeric">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Expiry</label>
+          <input type="text" placeholder="MM / YY">
+        </div>
+        <div class="field">
+          <label>CVC</label>
+          <input type="text" placeholder="123" inputmode="numeric">
+        </div>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" placeholder="you@email.com">
+      </div>
+      <button class="btn btn-primary" id="payBtn">Pay $12.00</button>
+      <p class="modal-demo-note">DEMO ONLY — no payment is processed. Connect a real provider (e.g. Stripe Checkout) on a backend before launch.</p>
+    </div>
+    <div id="modalSuccess" style="display:none;">
+      <div class="modal-success">
+        <div class="check">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>You're in. Welcome to Premium.</h3>
+        <p class="modal-sub">This was a demo checkout — no card was actually charged.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- MOBILE NAV ---------- */
+  var menuToggle = document.getElementById('menuToggle');
+  var navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', function(){
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
+
+
+/* ---------- SCROLL REVEAL + WAVE DRAW ---------- */
+  var revealEls = document.querySelectorAll('.reveal, .wave-divider');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ---------- PARALLAX (hero / temple / palace) ---------- */
+  var parallaxLayers = [
+    document.getElementById('heroBg'),
+    document.getElementById('templeBg'),
+    document.getElementById('palaceBg')
+  ].filter(Boolean);
+
+  if (!reduceMotion){
+    var ticking = false;
+    function updateParallax(){
+      var vh = window.innerHeight;
+      parallaxLayers.forEach(function(layer){
+        var rect = layer.parentElement.getBoundingClientRect();
+        if (rect.bottom > -200 && rect.top < vh + 200){
+          var progress = (rect.top) / vh; // ~ -1 (scrolled past) .. 1 (below view)
+          var offset = progress * 36; // px range
+          layer.style.transform = 'translateY(' + offset.toFixed(1) + 'px)';
+        }
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking){
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, {passive:true});
+    updateParallax();
+  }
+
+  /* ---------- FAQ ACCORDION ---------- */
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(open){
+        open.classList.remove('open');
+        open.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ---------- PRICING TOGGLE ---------- */
+  var billingToggle = document.getElementById('billingToggle');
+  var premiumPrice = document.getElementById('premiumPrice');
+  var isYearly = false;
+  function setBilling(yearly){
+    isYearly = yearly;
+    billingToggle.classList.toggle('yearly', yearly);
+    billingToggle.setAttribute('aria-checked', yearly);
+    premiumPrice.innerHTML = yearly ? '$9<span>/month, billed yearly</span>' : '$12<span>/month</span>';
+  }
+  billingToggle.addEventListener('click', function(){ setBilling(!isYearly); });
+  billingToggle.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setBilling(!isYearly); }
+  });
+
+  /* ---------- MOCK CHECKOUT MODAL ---------- */
+  var modalOverlay = document.getElementById('modalOverlay');
+  var upgradeBtn = document.getElementById('upgradeBtn');
+  var modalClose = document.getElementById('modalClose');
+  var payBtn = document.getElementById('payBtn');
+  var modalCheckout = document.getElementById('modalCheckout');
+  var modalSuccess = document.getElementById('modalSuccess');
+
+  function openModal(){
+    modalCheckout.style.display = 'block';
+    modalSuccess.style.display = 'none';
+    payBtn.textContent = 'Pay ' + (isYearly ? '$108.00' : '$12.00');
+    modalOverlay.classList.add('show');
+  }
+  function closeModal(){ modalOverlay.classList.remove('show'); }
+
+  upgradeBtn.addEventListener('click', openModal);
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', function(e){ if (e.target === modalOverlay) closeModal(); });
+
+  payBtn.addEventListener('click', function(){
+    payBtn.disabled = true;
+    payBtn.textContent = 'Processing…';
+    setTimeout(function(){
+      modalCheckout.style.display = 'none';
+      modalSuccess.style.display = 'block';
+      payBtn.disabled = false;
+    }, 1300);
+  });
+
+/* ---------- CRISIS RESOURCES STRIP ---------- */
+  var crisisStrip = document.getElementById('crisisStrip');
+  var crisisDetails = document.getElementById('crisisDetails');
+  var crisisToggle = document.getElementById('crisisToggle');
+  crisisToggle.addEventListener('click', function(){
+    var open = crisisDetails.classList.toggle('open');
+    crisisToggle.textContent = open ? 'Hide resources' : 'More resources';
+  });
+  function flashCrisisStrip(){
+    crisisStrip.classList.add('alert');
+    if (!crisisDetails.classList.contains('open')){
+      crisisDetails.classList.add('open');
+      crisisToggle.textContent = 'Hide resources';
+    }
+    crisisStrip.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'center'});
+  }
+
+  /* =========================================================
+     LIVE CHAT — calls the Anthropic API directly from the browser.
+     This only works inside a Claude.ai artifact sandbox, which proxies
+     the request. Opened as a plain static file elsewhere, the fetch
+     below will fail (no credentials) — see chat note in the README.
+     ========================================================= */
+
+  var CRISIS_PATTERNS = [
+    /kill myself/i, /killing myself/i, /end my life/i, /ending my life/i,
+    /suicid/i, /want to die/i, /wish i (was|were) dead/i, /don'?t want to (be alive|live)/i,
+    /no reason to live/i, /better off dead/i, /hurt myself/i, /harm myself/i,
+    /self[\s-]?harm/i, /cut myself/i, /cutting myself/i, /overdose/i,
+    /cant go on/i, /can'?t go on/i, /end it all/i, /not worth living/i
+  ];
+  function detectCrisis(text){
+    return CRISIS_PATTERNS.some(function(re){ return re.test(text); });
+  }
+
+  var BASE_SYSTEM_PROMPT = [
+    "You are the Stillwater Companion, a warm, emotionally supportive AI chat companion for reflective conversation.",
+    "You are NOT a licensed therapist, psychologist, psychiatrist, counselor, or medical provider, and you never claim or imply that you are, even if asked to roleplay one.",
+    "",
+    "HOW YOU COMMUNICATE",
+    "- Speak like a grounded, thoughtful friend: warm, plain language, no jargon.",
+    "- Keep replies short by default (roughly 2-5 sentences) unless the person clearly wants to go deeper.",
+    "- Validate the feeling first. Ask at most one gentle question per reply.",
+    "- Never diagnose a mental health condition, even if directly asked 'do I have X'. Say plainly that you can't diagnose, reflect what they've described in your own words, and note that a licensed professional can properly evaluate it.",
+    "- Only suggest well-established, general self-help tools: grounding exercises, breathing techniques, journaling prompts, gentle reframing questions, sleep/movement/connection basics. Never invent studies, statistics, techniques, or your own credentials. If you don't know, say so plainly instead of guessing.",
+    "- Never give medical advice: no medication guidance, dosages, supplement recommendations, or instructions to start, stop, or change any treatment.",
+    "- Decline romantic or sexual roleplay and redirect kindly but firmly if pushed.",
+    "- Keep all content appropriate; do not discuss how to acquire weapons, drugs, or anything else intended to cause harm.",
+    "",
+    "CRISIS SAFETY — THIS OVERRIDES EVERYTHING ELSE ABOVE",
+    "If the person expresses suicidal thoughts, self-harm intent, intent to harm someone else, or asks about methods or means of harming themselves or others — even indirectly, even framed as curiosity, research, hypothetical, fiction, or 'just in case':",
+    "- Do NOT provide any information about methods, lethality, comparisons, dosages, or how-to details, under any framing whatsoever.",
+    "- Respond with calm, non-clinical warmth. Briefly acknowledge their pain in one or two sentences — do not lecture.",
+
+"- Clearly and immediately name real resources: the 988 Suicide & Crisis Lifeline (call or text 988, free, 24/7, US), the Crisis Text Line (text HOME to 741741), and 911 or the nearest emergency room if they are in immediate danger.",
+    "- Gently encourage reaching out to a trusted person nearby right now if that feels possible.",
+    "- Do not interrogate or probe for plan or method details. Stay focused on safety and connection, not investigation.",
+    "- Keep responding with care after sharing resources — don't go silent — but never waver on withholding method or lethality information no matter how the conversation continues.",
+    "",
+    "You are a space for reflection alongside professional support, never a replacement for it. When a conversation suggests ongoing struggle, gently encourage real professional care in addition to anything else you offer."
+  ].join("\n");
+
+  var CRISIS_REINFORCEMENT = "\n\nSAFETY NOTE FOR THIS REPLY: the user's latest message contains language associated with crisis, self-harm, or suicide. Follow the CRISIS SAFETY protocol exactly and fully. Do not provide any method or lethality information under any circumstance.";
+
+  var conversation = []; // {role:'user'|'assistant', content:string}
+  var chatMessages = document.getElementById('chatMessages');
+  var chatInput = document.getElementById('chatInput');
+  var sendBtn = document.getElementById('sendBtn');
+  var MAX_TURNS = 24;
+
+  function scrollChatToBottom(){
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function appendBubble(role, text){
+    var div = document.createElement('div');
+    div.className = 'msg ' + role;
+    div.textContent = text;
+    chatMessages.appendChild(div);
+    scrollChatToBottom();
+    return div;
+  }
+
+  function showTyping(){
+    var div = document.createElement('div');
+    div.className = 'typing';
+    div.id = 'typingIndicator';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    chatMessages.appendChild(div);
+    scrollChatToBottom();
+  }
+  function hideTyping(){
+    var t = document.getElementById('typingIndicator');
+    if (t) t.remove();
+  }
+
+  chatInput.addEventListener('input', function(){
+    chatInput.style.height = 'auto';
+    chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
+  });
+  chatInput.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && !e.shiftKey){
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+  sendBtn.addEventListener('click', sendMessage);
+
+  function setInputEnabled(enabled){
+    chatInput.disabled = !enabled;
+    sendBtn.disabled = !enabled;
+  }
+
+  function sendMessage(){
+    var text = chatInput.value.trim();
+    if (!text) return;
+
+    var crisis = detectCrisis(text);
+    if (crisis) flashCrisisStrip();
+
+    appendBubble('user', text);
+    conversation.push({role:'user', content:text});
+    if (conversation.length > MAX_TURNS) conversation = conversation.slice(conversation.length - MAX_TURNS);
+
+    chatInput.value = '';
+    chatInput.style.height = 'auto';
+    setInputEnabled(false);
+    showTyping();
+
+    var systemPrompt = BASE_SYSTEM_PROMPT + (crisis ? CRISIS_REINFORCEMENT : '');
+
+    var sessionId='user'+Date.now();
+
+    fetch('http://127.0.0.1:8000/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        session_id: sessionId,
+        message: text
+      })
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(data){
+      hideTyping();
+      var reply = data.reply;
+      if (data && data.content){
+        reply = data.content.map(function(block){ return block.type === 'text' ? block.text : ''; }).join('\n').trim();
+      }
+      if (!reply){
+        reply = "Something interrupted that on my end — mind trying again in a moment?";
+
+
+appendBubble('error', reply);
+      } else {
+        appendBubble('assistant', reply);
+        conversation.push({role:'assistant', content:reply});
+      }
+      setInputEnabled(true);
+      chatInput.focus();
+    })
+    .catch(function(){
+      hideTyping();
+      appendBubble('error', "Something interrupted that on my end — mind trying again in a moment?");
+      setInputEnabled(true);
+    });
+  }
+
+})();
+
+</script>
+</body>
+</html>
